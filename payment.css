@@ -1,0 +1,79 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc; /* Light background for contrast */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px; /* Make the width responsive */
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Softer shadow for modern look */
+    text-align: center;
+    margin: 20px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    color: #31cd0a; /* Darker blue for heading contrast */
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Payment Option Buttons Styling */
+.payment-option {
+    margin: 10px;
+    padding: 12px;
+    background-color: #f1f1f1; /* Light grey background for payment options */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+}
+
+.payment-option:hover {
+    background-color: #e0e0e0; /* Slightly darker grey on hover */
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+}
+
+.payment-option:active {
+    background-color: #d0d0d0; /* Darker grey on button click */
+    transform: translateY(2px); /* Slight push down effect on active */
+}
+
+.payment-option span {
+    font-size: 20px;
+    margin-right: 8px; /* Spacing between the icon and text */
+}
+
+/* Styling for all buttons inside containers to have consistent design */
+button {
+    font-weight: bold;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

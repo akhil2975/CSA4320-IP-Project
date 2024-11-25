@@ -1,0 +1,123 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc; /* Light grey background */
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling for the customer portal container */
+.customer-portal {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #3b4a6b; /* Dark blue for header */
+}
+
+/* Styling for the bill details table */
+.bill-details table, .payment-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.bill-details td, .payment-history td {
+    padding: 12px;
+    border: 1px solid #e0e0e0; /* Light grey border */
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Alternate row colors for tables */
+.bill-details tr:nth-child(even), .payment-history tr:nth-child(even) {
+    background-color: #f9f9f9; /* Subtle alternate row background */
+}
+
+/* Styling for the scrollable payment history section */
+.history-box {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fafafa;
+}
+
+.payment-history table {
+    width: 100%;
+}
+
+/* Styling for table headers */
+.payment-history th {
+    padding: 12px;
+    background-color: #4CAF50; /* Fresh green for table header */
+    color: white;
+    font-size: 16px;
+}
+
+.payment-history td {
+    color: #333; /* Dark text for readability */
+}
+
+.payment-history th, .payment-history td {
+    text-align: left;
+}
+
+/* Hover effect for payment history rows */
+.payment-history tr:hover {
+    background-color: #f1f1f1; /* Light grey on hover */
+}
+
+/* Styling for Pay Now button */
+.payment-method button {
+    padding: 12px 24px;
+    background-color: #4CAF50; /* Vibrant green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.payment-method button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Adding a stylish border to the bill details section */
+.bill-details {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #d3d3d3;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the general container for buttons and sections */
+.payment-method, .bill-details, .payment-history {
+    margin-top: 20px;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .customer-portal {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .payment-method button {
+        width: 100%;
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+    <link rel="stylesheet" href="paymentdetails.css">
+</head>
+<body>
+    <div class="payment-details-container">
+        <div class="payment-form-container">
+            <h1>Enter Payment Details</h1>
+            <form id="paymentForm">
+                <div id="paymentFormContent"></div>
+                <button type="submit">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const paymentMethod = localStorage.getItem('paymentMethod'); // Get the payment method
+        const formContent = document.getElementById('paymentFormContent');
+
+        if (paymentMethod === 'credit') {
+            formContent.innerHTML = `
+                <label>Credit Card Number</label>
+                <input type="text" placeholder="Enter your credit card number" required>
+                <label>Expiry Date</label>
+                <input type="text" placeholder="MM/YY" required>
+                <label>CVV</label>
+                <input type="text" placeholder="3-digit code" required>`;
+        } else if (paymentMethod === 'debit') {
+            formContent.innerHTML = `
+                <label>Debit Card Number</label>
+                <input type="text" placeholder="Enter your debit card number" required>
+                <label>Expiry Date</label>
+                <input type="text" placeholder="MM/YY" required>
+                <label>CVV</label>
+                <input type="text" placeholder="3-digit code" required>`;
+        } else if (paymentMethod === 'upi') {
+            formContent.innerHTML = `
+                <label>UPI ID</label>
+                <input type="text" placeholder="Enter your UPI ID" required>
+                <label>PIN</label>
+                <input type="password" placeholder="Enter your UPI PIN" required>`;
+        }
+
+        // Handle form submission
+        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Simulate payment success
+            const username = "customer123"; // Dynamic username can be added if necessary
+            const billDetails = JSON.parse(localStorage.getItem(username));
+            const totalAmount = parseInt(billDetails.dueAmount) + parseInt(billDetails.lateFine);
+
+            // Save the payment history
+            const paymentHistory = JSON.parse(localStorage.getItem('paymentHistory')) || [];
+            paymentHistory.push({
+                amount: totalAmount,
+                date: new Date().toLocaleString(),
+                method: paymentMethod
+            });
+
+            localStorage.setItem('paymentHistory', JSON.stringify(paymentHistory));
+
+            // Clear the bill data after payment
+            localStorage.setItem(username, JSON.stringify({
+                dueAmount: 0,
+                dueDate: "Paid",
+                lateFine: 0
+            }));
+
+            // Redirect to payment success page
+            window.location.href = 'paymentsucc.html';
+        });
+    </script>
+</body>
+</html>

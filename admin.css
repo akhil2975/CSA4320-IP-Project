@@ -1,0 +1,136 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.admin-portal {
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.billing-management,
+.payment-history {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1rem;
+    color: #444;
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+input:focus, button:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+}
+
+/* Button Styles for Payment History Section */
+.payment-history button {
+    width: auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.payment-history button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.payment-history button:active {
+    background-color: #3e8e41;
+    transform: scale(1);
+}
+
+@media (max-width: 600px) {
+    .admin-portal {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+
+    .payment-history button {
+        font-size: 0.9rem;
+    }
+}

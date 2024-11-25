@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-portal">
+        <h1>Admin Dashboard</h1>
+
+        <!-- Bill Management Form -->
+        <div class="billing-management">
+            <h2>Manage Bill Details</h2>
+            <form id="billForm">
+                <div class="input-group">
+                    <label for="username">Customer Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter Customer Username" required>
+                </div>
+                <div class="input-group">
+                    <label for="dueAmount">Due Amount (₹)</label>
+                    <input type="number" id="dueAmount" name="dueAmount" placeholder="Enter Due Amount" required>
+                </div>
+                <div class="input-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" name="dueDate" required>
+                </div>
+                <div class="input-group">
+                    <label for="lateFine">Late Payment Fine (₹)</label>
+                    <input type="number" id="lateFine" name="lateFine" placeholder="Enter Late Fine Amount" required>
+                </div>
+                <button type="submit">Update Bill Details</button>
+            </form>
+        </div>
+
+        <!-- Payment History Section -->
+        <div class="payment-history">
+            <h2>Payment History</h2>
+            <button onclick="viewUserHistory()">View User Payment History</button>
+        </div>
+    </div>
+
+    <script>
+        const billForm = document.getElementById('billForm');
+
+        // Handle form submission for bill management
+        billForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const username = document.getElementById('username').value;
+            const dueAmount = document.getElementById('dueAmount').value;
+            const dueDate = document.getElementById('dueDate').value;
+            const lateFine = document.getElementById('lateFine').value;
+
+            // Save bill details in localStorage under the user's username
+            const billDetails = { dueAmount, dueDate, lateFine };
+            localStorage.setItem(username, JSON.stringify(billDetails));
+
+            // Notify admin and reset form
+            alert(`Bill details updated for user: ${username}`);
+            billForm.reset();
+        });
+
+        // Redirect to Payment History page
+        function viewUserHistory() {
+            window.location.href = 'history.html'; // Redirect to the Payment History page
+        }
+    </script>
+</body>
+</html>

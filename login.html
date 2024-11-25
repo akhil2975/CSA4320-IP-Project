@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="role">Login as</label>
+                <select id="role" name="role" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+
+            const role = document.getElementById('role').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Admin credentials (these can be securely stored in a backend in real-world applications)
+            const adminUsername = 'admin';
+            const adminPassword = 'admin123';
+
+            // User credentials from localStorage
+            const storedUsername = localStorage.getItem('username');
+            const storedPassword = localStorage.getItem('password');
+
+            // Validate login based on role
+            if (role === 'admin') {
+                if (username === adminUsername && password === adminPassword) {
+                    alert('Admin login successful!');
+                    window.location.href = 'admin.html'; // Redirect to admin dashboard
+                } else {
+                    alert('Invalid admin credentials.');
+                }
+            } else if (role === 'user') {
+                if (username === storedUsername && password === storedPassword) {
+                    alert('User login successful!');
+                    window.location.href = 'customer.html'; // Redirect to user dashboard
+                } else {
+                    alert('Invalid user credentials.');
+                }
+            } else {
+                alert('Please select a role.');
+            }
+        });
+    </script>
+</body>
+</html>

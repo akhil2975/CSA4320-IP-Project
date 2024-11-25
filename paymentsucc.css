@@ -1,0 +1,88 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.payment-success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f4f6f9;
+}
+
+.success-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    transition: box-shadow 0.3s ease;
+}
+
+.success-box:hover {
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.2);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #3e8e41;
+    transform: scale(1);
+}
+
+@media (max-width: 600px) {
+    .success-box {
+        width: 80%;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Methods</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <div class="payment-methods">
+        <div class="container">
+            <h1>Select a Payment Method</h1>
+            <div class="payment-options">
+                <button class="payment-option" onclick="selectPayment('credit')">
+                    <span>💳</span> Credit Card
+                </button>
+                <button class="payment-option" onclick="selectPayment('debit')">
+                    <span>💳</span> Debit Card
+                </button>
+                <button class="payment-option" onclick="selectPayment('upi')">
+                    <span>📱</span> UPI
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store the selected payment method in localStorage
+        function selectPayment(method) {
+            localStorage.setItem('paymentMethod', method);
+            window.location.href = 'paymentdetails.html'; // Redirect to payment details page
+        }
+    </script>
+</body>
+</html>

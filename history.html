@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Payment History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="admin-portal">
+        <h1>Admin Portal: Payment History</h1>
+
+        <!-- Payment History Table -->
+        <table id="admin-history-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Payment Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Back Button -->
+        <button onclick="goBack()">Back to Main Dashboard</button>
+    </div>
+
+    <script>
+        // Load and display payment history
+        function loadAdminPaymentHistory() {
+            const adminPaymentHistory = JSON.parse(localStorage.getItem('adminPaymentHistory')) || [];
+            const tableBody = document.getElementById('admin-history-table').getElementsByTagName('tbody')[0];
+
+            // Clear table
+            tableBody.innerHTML = '';
+
+            // Populate table if history exists
+            if (adminPaymentHistory.length > 0) {
+                adminPaymentHistory.forEach(payment => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${payment.username}</td>
+                        <td>₹${parseFloat(payment.amount).toFixed(2)}</td>
+                        <td>${payment.date}</td>
+                        <td>${payment.method}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                // Show message if no history is available
+                const noDataRow = document.createElement('tr');
+                noDataRow.innerHTML = `<td colspan="4">No payment history found.</td>`;
+                tableBody.appendChild(noDataRow);
+            }
+        }
+
+        // Call function on page load
+        window.onload = loadAdminPaymentHistory;
+
+        // Redirect back to the Admin Dashboard
+        function goBack() {
+            window.location.href = 'admin.html'; // Redirect to the Admin Dashboard
+        }
+    </script>
+</body>
+</html>

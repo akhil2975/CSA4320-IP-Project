@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+    <div class="customer-portal">
+        <h1>My Bills</h1>
+        
+        <!-- Bill Details Section -->
+        <div class="bill-details">
+            <h2>Current Bill Details</h2>
+            <table>
+                <tr>
+                    <td>Due Date</td>
+                    <td id="due-date">Loading...</td>
+                </tr>
+                <tr>
+                    <td>Bill Amount</td>
+                    <td id="bill-amount">Loading...</td>
+                </tr>
+                <tr>
+                    <td>Late Payment Fine</td>
+                    <td id="late-fine">Loading...</td>
+                </tr>
+                <tr>
+                    <td>Total Amount</td>
+                    <td id="total-amount">Loading...</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Payment History Section -->
+        <div class="payment-history">
+            <h2>Payment History</h2>
+            <div class="history-box">
+                <table id="payment-history-table">
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Payment history rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Payment Method Section -->
+        <div class="payment-method">
+            <h2>Select Payment Method</h2>
+            <div class="payment-options">
+                <button class="payment-option" onclick="goToPaymentPage()">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch and update bill details from localStorage
+        function updateBillDetails() {
+            const username = "customer123"; // Replace with dynamic username if necessary
+            const billDetails = JSON.parse(localStorage.getItem(username));
+
+            if (billDetails) {
+                // Check if the payment is late
+                const currentDate = new Date();
+                const dueDate = new Date(billDetails.dueDate); // Convert dueDate to a Date object
+
+                let lateFine = 0;
+                if (currentDate > dueDate) {
+                    lateFine = parseFloat(billDetails.lateFine || 50); // Default late fine is ₹50 if not specified
+                }
+
+                const dueAmount = parseFloat(billDetails.dueAmount || 0); // Ensure dueAmount is a number
+                const totalAmount = dueAmount + lateFine; // Calculate total amount
+
+                // Update the UI with bill details
+                document.getElementById('due-date').innerText = billDetails.dueDate;
+                document.getElementById('bill-amount').innerText = `₹${dueAmount.toFixed(2)}`;
+                document.getElementById('late-fine').innerText = `₹${lateFine.toFixed(2)}`;
+                document.getElementById('total-amount').innerText = `₹${totalAmount.toFixed(2)}`;
+
+                // Update localStorage with the updated late fine
+                billDetails.lateFine = lateFine;
+                localStorage.setItem(username, JSON.stringify(billDetails));
+            } else {
+                // Handle case where no bill details are available
+                document.getElementById('due-date').innerText = "N/A";
+                document.getElementById('bill-amount').innerText = "N/A";
+                document.getElementById('late-fine').innerText = "N/A";
+                document.getElementById('total-amount').innerText = "N/A";
+            }
+        }
+
+        // Function to fetch and display payment history
+        function displayPaymentHistory() {
+            const history = JSON.parse(localStorage.getItem('paymentHistory')) || [];
+            const historyTableBody = document.getElementById('payment-history-table').getElementsByTagName('tbody')[0];
+
+            // Clear any existing rows
+            historyTableBody.innerHTML = '';
+
+            // Insert new rows for each payment in history
+            history.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>₹${parseFloat(payment.amount).toFixed(2)}</td>
+                    <td>${payment.date}</td>
+                    <td>${payment.method}</td>
+                `;
+                historyTableBody.appendChild(row);
+            });
+
+            if (history.length === 0) {
+                // If no payment history is found
+                const noDataRow = document.createElement('tr');
+                noDataRow.innerHTML = `<td colspan="3">No payment history found.</td>`;
+                historyTableBody.appendChild(noDataRow);
+            }
+        }
+
+        // Function to redirect to payment page
+        function goToPaymentPage() {
+            window.location.href = 'payment.html'; // Redirect to the payment page
+        }
+
+        // Initialize the dashboard
+        window.onload = function () {
+            updateBillDetails();
+            displayPaymentHistory();
+        };
+    </script>
+</body>
+</html>

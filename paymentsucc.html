@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <link rel="stylesheet" href="paymentsucc.css">
+</head>
+<body>
+    <div class="payment-success-container">
+        <div class="success-box">
+            <h1>Payment Successful!</h1>
+            <p>Your payment has been processed successfully.</p>
+            <button id="goToDashboard">Go to Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve the payment data from localStorage
+        const paymentData = JSON.parse(localStorage.getItem('currentPayment'));
+
+        if (paymentData) {
+            // Add payment to admin's payment history
+            const adminPaymentHistory = JSON.parse(localStorage.getItem('adminPaymentHistory')) || [];
+            adminPaymentHistory.push({
+                username: paymentData.username,
+                amount: paymentData.amount,
+                date: paymentData.date,
+                method: paymentData.method
+            });
+            localStorage.setItem('adminPaymentHistory', JSON.stringify(adminPaymentHistory));
+
+            // Clear the user's current bill after successful payment
+            localStorage.setItem(paymentData.username, JSON.stringify({
+                dueAmount: 0,
+                dueDate: "Paid",
+                lateFine: 0
+            }));
+
+            // Remove temporary payment data
+            localStorage.removeItem('currentPayment');
+        }
+
+        // Redirect to the dashboard
+        document.getElementById('goToDashboard').addEventListener('click', function () {
+            window.location.href = 'customer.html'; // Redirect to user's dashboard or homepage
+        });
+    </script>
+</body>
+</html>
